@@ -14,6 +14,7 @@ class Player {
         for (let card of this.hand) {
             if (card.getRank() === 'Ace') {
                 aces++;
+                score += 11;
             }
             else if (['King', 'Queen', 'Jack'].includes(card.getRank())) {
                 score += 10;
@@ -38,6 +39,9 @@ class Player {
             }
         }
         console.log(`  Score: ${this.getScore()}`);
+    }
+    resetHand() {
+        this.hand = []; //empty cards from hand array
     }
 }
 exports.Player = Player;
