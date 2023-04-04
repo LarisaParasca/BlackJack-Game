@@ -1,5 +1,5 @@
 
-import { Card } from "./Card";
+import { Card } from "./card";
 export class Deck {
     private cards: Card[];
   
@@ -12,7 +12,7 @@ export class Deck {
       }
     }
   
-    public shuffle(): void {
+    public shuffle(): void {  
       for (let i = this.cards.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
@@ -25,10 +25,6 @@ export class Deck {
       }
   
       return this.cards.pop()!;
-    }
-  
-    public getCardCount(): number {
-      return this.cards.length;
     }
   }
   

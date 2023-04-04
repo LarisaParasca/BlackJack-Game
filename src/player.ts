@@ -1,6 +1,5 @@
 
-import { Card } from "./Card";
-
+import { Card } from "./card";
 
 export class Player {
     private hand: Card[];
@@ -17,10 +16,11 @@ export class Player {
       let score: number = 0;
       let aces: number = 0;
   
-      for (let card of this.hand) {
-        if (card.getRank() === 'A') {
+      for (let card of this.hand) {  
+
+        if (card.getRank() === 'Ace') {
           aces++;
-        } else if (['K', 'Q', 'J'].includes(card.getRank())) {
+        } else if (['King', 'Queen', 'Jack'].includes(card.getRank())) {
           score += 10;
         } else {
           score += parseInt(card.getRank(), 10);
@@ -35,9 +35,9 @@ export class Player {
       return score;
     }
   
-    public printCards(showAllCards: boolean = false): void {
+    public printCards(dealer : boolean = false): void {
       for (let i = 0; i < this.hand.length; i++) {
-        if (i === 0 && !showAllCards) {
+        if (i === 0 && dealer) {
           console.log('  <hidden>');
         } else {
           console.log(`  ${this.hand[i].getRank()} of ${this.hand[i].getSuit()}`);

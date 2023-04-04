@@ -18,17 +18,6 @@ class Card {
     getRank() {
         return this.rank;
     }
-    getValue() {
-        if (this.rank === 'Ace') {
-            return 11;
-        }
-        else if (['Jack', 'Queen', 'King'].includes(this.rank)) {
-            return 10;
-        }
-        else {
-            return parseInt(this.rank, 10);
-        }
-    }
 }
 Card.suits = ['hearts', 'diamonds', 'clubs', 'spades'];
 Card.ranks = [

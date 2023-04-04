@@ -26,14 +26,4 @@ export class Card {
   public getRank(): string {
     return this.rank;
   }
-
-  public getValue(): number {
-    if (this.rank === 'Ace') {
-      return 11;
-    } else if (['Jack', 'Queen', 'King'].includes(this.rank)) {
-      return 10;
-    } else {
-      return parseInt(this.rank, 10);
-    }
-  }
 }

@@ -12,10 +12,10 @@ class Player {
         let score = 0;
         let aces = 0;
         for (let card of this.hand) {
-            if (card.getRank() === 'A') {
+            if (card.getRank() === 'Ace') {
                 aces++;
             }
-            else if (['K', 'Q', 'J'].includes(card.getRank())) {
+            else if (['King', 'Queen', 'Jack'].includes(card.getRank())) {
                 score += 10;
             }
             else {
@@ -28,9 +28,9 @@ class Player {
         }
         return score;
     }
-    printCards(showAllCards = false) {
+    printCards(dealer = false) {
         for (let i = 0; i < this.hand.length; i++) {
-            if (i === 0 && !showAllCards) {
+            if (i === 0 && dealer) {
                 console.log('  <hidden>');
             }
             else {

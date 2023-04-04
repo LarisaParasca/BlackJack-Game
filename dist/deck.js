@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Deck = void 0;
-const Card_1 = require("./Card");
+const card_1 = require("./card");
 class Deck {
     constructor() {
         this.cards = [];
-        for (const suit of Card_1.Card.suits) {
-            for (const rank of Card_1.Card.ranks) {
-                this.cards.push(new Card_1.Card(suit, rank));
+        for (const suit of card_1.Card.suits) {
+            for (const rank of card_1.Card.ranks) {
+                this.cards.push(new card_1.Card(suit, rank));
             }
         }
     }
@@ -22,9 +22,6 @@ class Deck {
             throw new Error('No cards left in deck');
         }
         return this.cards.pop();
-    }
-    getCardCount() {
-        return this.cards.length;
     }
 }
 exports.Deck = Deck;
