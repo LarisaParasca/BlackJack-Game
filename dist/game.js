@@ -52,19 +52,19 @@ class Game {
         });
     }
     play() {
-        this.gameReset();
-        this.balance -= this.bet;
-        console.log('Your balance is now ' + this.balance + ' EUR');
-        this.deck.shuffle();
+        this.gameReset(); // resets both player and dealer hands
+        this.balance -= this.bet; //subtract the bet placed
+        console.log('Your balance is now ' + this.balance + ' EUR'); // showing updated balance
+        this.deck.shuffle(); // 
         this.dealer.addCard(this.deck.drawCard());
         this.dealer.addCard(this.deck.drawCard());
         this.player.addCard(this.deck.drawCard());
         this.player.addCard(this.deck.drawCard());
-        console.log('Player has:');
+        console.log('Player has:'); // shows cards
         this.player.printCards();
         console.log('Dealer has:');
         this.dealer.printCards(true);
-        this.checkForBlackjack();
+        this.checkForBlackjack(); //check if either the player or dealer has the score = 21 
         this.input.question('Do you want to hit or stand? (h/s)', (answer) => {
             if (answer === 'h') {
                 this.hit();
@@ -78,10 +78,10 @@ class Game {
         });
     }
     hit() {
-        this.player.addCard(this.deck.drawCard());
+        this.player.addCard(this.deck.drawCard()); // add another card to the hand
         console.log('Player has:');
-        this.player.printCards();
-        this.checkForBlackjack();
+        this.player.printCards(); //shows the new available hand
+        this.checkForBlackjack(); //check  blackjack
         if (this.player.getScore() > 21) {
             console.log('Player busts!');
             this.end();
@@ -138,18 +138,18 @@ class Game {
         }
     }
     gameReset() {
-        this.player.resetHand();
-        this.dealer.resetHand();
+        this.player.resetHand(); //empty pleayer hand
+        this.dealer.resetHand(); // empty dealer hand
     }
     end() {
         console.log('Game over!');
-        //   this.input.close();
         this.input.question('Do you want to play again? (y/n)', (answer) => {
             if (answer === 'y') {
                 this.start();
             }
             else if (answer === 'n') {
                 console.log('Thank you for playing!');
+                this.input.close(); // cloeses readline communication
             }
         });
     }

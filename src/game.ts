@@ -14,7 +14,7 @@ export class Game {
       this.deck = new Deck();
       this.player = new Player();
       this.dealer = new Player();
-      this.balance = 1000;
+      this.balance = 1000; 
       this.bet = 1;
       this.input = readline.createInterface({
         input: process.stdin,
@@ -22,34 +22,35 @@ export class Game {
       });
     }
   
-    public start(): void {
+    public start(): void { // starts the game and ask the player if he proceeds with a bet
         console.log('Starting the game...');
-        this.input.question('Your balance is now ' +this.balance + ' EUR. Do you want to place a bet (y/n)', (answer: string) => {
+        this.input.question('Your balance is now ' + this.balance + ' EUR. Do you want to place a bet (y/n)', (answer: string) => {
         if (answer === 'y' && this.balance > 0) {
          this.play();
          } else if (answer === 'n') {
          console.log('See you again next time!');
          this.input.close();
-
-    }}); }
+        }
+      }); 
+    }
     
-    public play() : void {
-      this.gameReset();
-      this.balance -= this.bet;
-      console.log('Your balance is now ' + this.balance + ' EUR');
-      this.deck.shuffle();
-      this.dealer.addCard(this.deck.drawCard());
+    public play() : void { 
+      this.gameReset(); // resets both player and dealer hands
+      this.balance -= this.bet; //subtract the bet placed
+      console.log('Your balance is now ' + this.balance + ' EUR'); // showing updated balance
+      this.deck.shuffle(); // 
+      this.dealer.addCard(this.deck.drawCard()); 
       this.dealer.addCard(this.deck.drawCard());
       this.player.addCard(this.deck.drawCard());
       this.player.addCard(this.deck.drawCard());
   
-      console.log('Player has:');
+      console.log('Player has:'); // shows cards
       this.player.printCards();
   
       console.log('Dealer has:');
       this.dealer.printCards(true);
 
-      this.checkForBlackjack();
+      this.checkForBlackjack(); //check if either the player or dealer has the score = 21 
 
      this.input.question('Do you want to hit or stand? (h/s)', (answer: string) => {
      if (answer === 'h') {
@@ -58,25 +59,23 @@ export class Game {
       this.stand();
       } else {
       console.log('Invalid input');
-     
       }
       });
-
-
-   
     }
   
     public hit(): void {
-      this.player.addCard(this.deck.drawCard());
+      this.player.addCard(this.deck.drawCard()); // add another card to the hand
   
       console.log('Player has:');
-      this.player.printCards();
-      this.checkForBlackjack();
-      if (this.player.getScore() > 21) {
+      this.player.printCards(); //shows the new available hand
+
+      this.checkForBlackjack(); //check  blackjack
+
+      if (this.player.getScore() > 21) { 
         console.log('Player busts!');
         this.end();
       } else {
-      this.input.question('Do you want to hit or stand? (h/s)', (answer: string) => {
+      this.input.question('Do you want to hit or stand? (h/s)', (answer: string) => { //creating a continuos hit/stand question to be available multiple times
         if (answer === 'h') {
           this.hit();
         } else if (answer === 's') {
@@ -93,7 +92,7 @@ export class Game {
       while (this.dealer.getScore() < 17) {
         this.dealer.addCard(this.deck.drawCard()); //The dealer will always hit with a hand < 17.
       }
-  
+
       console.log('Dealer has:');
       this.dealer.printCards(true);
   
@@ -129,22 +128,20 @@ export class Game {
     }
 
     public gameReset(){
-        this.player.resetHand();
-        this.dealer.resetHand();
+        this.player.resetHand(); //empty pleayer hand
+        this.dealer.resetHand(); // empty dealer hand
     }
   
     public end(): void {
       console.log('Game over!');
-    //   this.input.close();
         this.input.question('Do you want to play again? (y/n)', (answer: string) => {
         if (answer === 'y') {
             this.start();  
          } else if (answer === 'n') {
            console.log('Thank you for playing!');
+           this.input.close(); // cloeses readline communication
          }
      });
     }
-
-
 }
 
